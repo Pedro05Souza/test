@@ -1,0 +1,41 @@
+{
+  "name": "wagering-processor",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run src/main.ts",
+    "dev": "bun --watch run src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "infra:up": "docker compose up -d --build postgres ministack ministack-init",
+    "infra:down": "docker compose down -v",
+    "stack:up": "docker compose up -d --build",
+    "stack:down": "docker compose down",
+    "migrate:up": "bun run scripts/migrate.ts up",
+    "migrate:down": "bun run scripts/migrate.ts down",
+    "send:wager": "bun run scripts/send-wager-message.ts",
+    "test": "bun test",
+    "test:unit": "bun test test/unit",
+    "test:integration": "bun test test/integration",
+    "test:concurrency": "bun test test/concurrency"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.6",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.1156.0",
+    "@mikro-orm/core": "^7.2.5",
+    "@mikro-orm/migrations": "^7.2.5",
+    "@mikro-orm/postgresql": "^7.2.5",
+    "@nestjs/common": "^12.2.0",
+    "@nestjs/core": "^12.2.0",
+    "@nestjs/platform-express": "^12.2.0",
+    "decimal.js": "^10.6.0",
+    "pino": "^10.4.0",
+    "prom-client": "^15.1.3",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^4.6.7"
+  }
+}
